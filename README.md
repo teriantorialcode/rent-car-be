@@ -43,13 +43,5 @@
 
 
 ### Architecture Design
-
-+-----------------+     API Requests/Responses (JSON)     +--------------------+     SQL Queries/Results              +---------------------------+
-|  Vue 3 Frontend  |------------------------------------->|  .NET API Backend  |------------------------------------->| PostgreSQL Database       |
-| (Browser)        |                                      |        C#          |                                      | (car,booking data Store)  |
-+-----------------+                                       +--------------------+                                      +---------------------------+
-     ^                                                              |
-     |                                                              |
-     +--------------------------------------------------------------+
-                      Data Flow (e.g., Car Data, Booking Rent data)
+<img width="641" alt="image" src="https://github.com/user-attachments/assets/a93f9829-b018-48e3-a74c-3020a6afc3b1" />
 ---
