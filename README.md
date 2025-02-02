@@ -9,7 +9,7 @@
      ```
 
 ### 2. **Install Dependencies**
-   - Pastikan Anda sudah menginstal **.NET SDK**. Anda bisa mengunduhnya [di sini](https://dotnet.microsoft.com/download).
+   - Pastikan Anda sudah menginstal **.NET SDK**. Saya memakai .net 7. Silakan mengunduhnya [di sini](https://dotnet.microsoft.com/download).
    - Jalankan perintah berikut untuk menginstal semua dependencies:
      ```bash
      dotnet restore
@@ -41,4 +41,15 @@
      ```
    - API backend akan berjalan di `https://localhost:7127`.
 
+
+### Architecture Design
+
++-----------------+     API Requests/Responses (JSON)     +--------------------+     SQL Queries/Results              +---------------------------+
+|  Vue 3 Frontend  |------------------------------------->|  .NET API Backend  |------------------------------------->| PostgreSQL Database       |
+| (Browser)        |                                      |        C#          |                                      | (car,booking data Store)  |
++-----------------+                                       +--------------------+                                      +---------------------------+
+     ^                                                              |
+     |                                                              |
+     +--------------------------------------------------------------+
+                      Data Flow (e.g., Car Data, Booking Rent data)
 ---
