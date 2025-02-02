@@ -38,21 +38,21 @@ namespace rent_car_api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCarModel([FromBody] CarInsertModel model)
+        public async Task<IActionResult> AddCar([FromBody] CarInsertModel model)
         {
             var createdModel = await _carModelService.AddCarAsync(model);
             return CreatedAtAction(nameof(GetAllCarModels), new { id = createdModel.Id }, createdModel);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCarModel(Guid id, [FromBody] Car model)
+        public async Task<IActionResult> UpdateCar(Guid id, [FromBody] Car model)
         {
             await _carModelService.UpdateCarAsync(id, model);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCarModel(Guid id)
+        public async Task<IActionResult> DeleteCar(Guid id)
         {
             await _carModelService.DeleteCarAsync(id);
             return NoContent();
