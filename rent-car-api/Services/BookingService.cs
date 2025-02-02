@@ -51,6 +51,23 @@ namespace rent_car_api.Services
                 Message = "Booking successful"
             };
         }
+
+        public async Task<List<RentCarListModel>> GetRentCarListAsync()
+        {
+            var rentCarList = await (from b in _context.Bookings
+                                     join c in _context.Cars on b.CarModelId equals c.Id
+                                     select new RentCarListModel
+                                     {
+                                         Brand = c.Brand, 
+                                         CustomerName = b.CustomerName, 
+                                         Date = b.Date,
+                                         TimeSlot = b.TimeSlot
+                                     }).ToListAsync();
+
+            return rentCarList;
+        }
+
+
     }
 
 }

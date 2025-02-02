@@ -48,6 +48,14 @@ namespace rent_car_api.Controllers
             var availableSlots = await _bookingService.GetAvailableSlotsAsync(carId, date);
             return Ok(availableSlots);
         }
+
+        [HttpGet("rent-car-list")]
+        public async Task<IActionResult> GetRentCarList()
+        {
+            var rentCarList = await _bookingService.GetRentCarListAsync();
+            return Ok(rentCarList);
+        }
+
     }
 
 }

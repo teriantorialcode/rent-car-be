@@ -8,6 +8,7 @@ namespace rent_car_api.Services
     {
         Task<IEnumerable<string>> GetAvailableSlotsAsync(Guid carModelId, DateTime date);
         Task<BookingResponseModel> BookTestDriveAsync(Booking booking);
+        Task<List<RentCarListModel>> GetRentCarListAsync();
     }
 }
 
