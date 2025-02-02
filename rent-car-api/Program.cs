@@ -5,21 +5,31 @@ using AutoMapper;
 using rent_car_api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // Add services to the container.
 builder.Services.AddAutoMapper(typeof(ObjectMapperProfile));
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<ICarService, CarService>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost",
+        builder => builder
+            .WithOrigins("http://localhost:5173")  // Ganti dengan port yang sesuai jika Vue berjalan di port yang berbeda
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
 
+
+
+builder.Services.AddScoped<ICarService, CarService>();
+builder.Services.AddScoped<IBookingService, BookingService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
 
 var app = builder.Build();
 
@@ -32,10 +42,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// Add CORS middleware here to allow frontend to communicate with backend
+app.UseCors("AllowLocalhost");
 
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
-
